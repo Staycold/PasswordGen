@@ -9,6 +9,13 @@ const randomPass = {
   special: getRandomSpecial
 };
 
+
+
+const randomLower = getRandomLower()
+const randomUpper = getRandomUpper()
+const randomNumber = getRandomNumber()
+const randomSpecial = getRandomSpecial()
+
 const randomCharUtils = Object.values(randomPass)
 
 
@@ -44,18 +51,48 @@ generateBtn.addEventListener("click", writePassword);
 
 function generatePassword() {
   let passwordLength = window.prompt ("please select password length, between 8-128 characters.");
-
+  console.log(passwordLength)
   passwordLength=Number(passwordLength)
-
-  if ( passwordLength <=7 || passwordLength >=129){
-    console.log("Your Password doesn't meet the criteria")
-    return;
+  console.log(passwordLength)
+  if (typeof passwordLength !== 'number' || (passwordLength <=7 || passwordLength >=129)){
+    window.alert("Please enter a valid number")
+    generatePassword();
   }
+  
+  let needSpecial = confirm("Do you want special characters in your password?");
+  let needNum = confirm("Do you want numbers in your password?");
+  let needLower = confirm("Do you want lowercase characters in your password?");
+  let needUpper = confirm("Do you wanr uppercase characters in your password?");
+  
+   let utilsUse = [];
+   
+   if (needSpecial){
+     utilsUse.push(getRandomSpecial);
+   }
+   if (needNum){
+    utilsUse.push(getRandomNumber);
+  }
+  if (needUpper){
+    utilsUse.push(getRandomUpper);
+  }
+  if (needLower){
+    utilsUse.push(getRandomLower);
+  }
+  if (!needSpecial && !needNum && !needLower && !needUpper ){
+    window.alert("Do you want a password or not?")
+  }
+  
+  
+
+  // if ( passwordLength <=7 || passwordLength >=129){
+  //   console.log("Your Password doesn't meet the criteria")
+  //   return;
+  // }
 
   let passWord = ""
 
   while(passWord.length <= passwordLength) {
-    const newCharacter = randomCharUtils[Math.floor(Math.random()*randomCharUtils.length)]()
+    const newCharacter = utilsUse[Math.floor(Math.random()*utilsUse.length)]()
     passWord += newCharacter;
   };
 
@@ -63,76 +100,3 @@ function generatePassword() {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-const letters = "abcdefghijklmnopqrstuvwxyz";
-const upperLetter ="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-const numbers ="0123456789";
-const special ="!@#$%^&*_-=+";
-
-
-// const passwordTxt = document.getElementById("passowrd");
-// const length = document.getle
-
-
-
-
-
-// for (i = 1; i <= 8; i++) {
-//     var char = Math.floor(Math.random()
-//                 * str.length + 1);
-      
-//     pass += str.charAt(char)
-// }
-  
-// return pass;
-
-
-
-
-
-
-if(password.length<8){
-    console.log("your password does not meat specified parameters")
-}
